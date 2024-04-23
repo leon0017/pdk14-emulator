@@ -26,7 +26,7 @@ void print_program_b14(Program *program) {
     for (int64_t i = 0; i < program->program_len; i++) {
         //u8 val = program->program[i];
 
-        // TODO: Print 14 bit binary number on each line                  
+        // TODO: Print 14 bit binary number on each line
     }
 }
 

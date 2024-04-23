@@ -6,7 +6,7 @@ OUTPUT  := $(OBJ_DIR)/pdk14-emulator
 
 C_FILES := $(shell find $(SRC_DIR) -type f -name '*.c')
 
-.PHONY: all clean link run
+.PHONY: all clean link run test_program
 
 all: run
 
@@ -16,7 +16,11 @@ run: link
 
 clean:
 	rm -rf $(OBJ_DIR)
+	make -C test_program clean
 
-link:
+build_test_program:
+	$(MAKE) -C test_program
+
+link: build_test_program
 	@echo " CC $(C_FILES)"
 	@cc $(C_FILES) -I $(INC_DIR) -Wpedantic -Werror -Wall -o $(OUTPUT)

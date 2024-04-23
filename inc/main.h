@@ -2,7 +2,7 @@
 
 #include <stdint.h>
 
-#define PROGRAM_PATH "program"
+#define PROGRAM_PATH "test_program/.output/TestProgram_PFS154.bin"
 
 typedef uint8_t  u8;
 typedef int8_t   i8;
