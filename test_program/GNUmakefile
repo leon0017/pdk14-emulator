@@ -19,7 +19,7 @@ SOURCES = test_program.c
 OBJECTS = $(patsubst %.c,$(BUILD_DIR)/%.rel,$(SOURCES))
 
 # http://sdcc.sourceforge.net/doc/sdccman.pdf
-COMPILE = sdcc -m$(ARCH) -c --std-sdcc11 --opt-code-size -D$(DEVICE) -DF_CPU=$(F_CPU) -DTARGET_VDD_MV=$(TARGET_VDD_MV) -I.
+COMPILE = sdcc -m$(ARCH) -c --std-sdcc11 --opt-code-size -D$(DEVICE) -DF_CPU=$(F_CPU) -DTARGET_VDD_MV=$(TARGET_VDD_MV) -I. -Iinclude
 LINK = sdcc -m$(ARCH)
 EASYPDKPROG = easypdkprog
 
