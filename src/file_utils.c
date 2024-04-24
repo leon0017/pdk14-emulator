@@ -9,7 +9,10 @@ Program fu_read_program() {
     rewind(file_ptr);
 
     u8 *program_buffer = malloc(file_len * sizeof(u8));
-    fread(program_buffer, file_len, 1, file_ptr);
+    if (fread(program_buffer, file_len, 1, file_ptr) != 1) {
+        perror("fread");
+    }
+
     fclose(file_ptr);
 
     Program program = {
