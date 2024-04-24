@@ -2,7 +2,6 @@
 #include <main.h>
 #include <file_utils.h>
 #include <time.h>
-#include <sys/select.h>
 
 void print_program_hex8(Program *program) {
     for (int64_t i = 0; i < program->program_len; i++) {
