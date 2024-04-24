@@ -1,20 +1,13 @@
 #pragma once
 
-#include <stdint.h>
+#include <types.h>
 
 #define PROGRAM_PATH "test_program/.output/TestProgram_PFS154.bin"
 
-typedef uint8_t  u8;
-typedef int8_t   i8;
-typedef uint16_t u16;
-typedef int16_t  i16;
-typedef uint32_t u32;
-typedef int32_t  i32;
-typedef uint64_t u64;
-typedef int64_t  i64;
-typedef uint8_t  bool;
+#define ROM_MAX 8192
+#define RAM_MAX 512
 
-#define false 0
-#define true 1
-
-#define NULL ((void *)0)
+typedef struct {
+    u16 *rom;
+    u16 *ram;
+} CPU;
