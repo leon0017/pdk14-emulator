@@ -22,5 +22,6 @@ build_test_program:
 	$(MAKE) -C test_program
 
 link: build_test_program
+	@mkdir -p $(OBJ_DIR)
 	@echo " CC $(C_FILES)"
-	@cc $(C_FILES) -I $(INC_DIR) -Wpedantic -Werror -Wall -o $(OUTPUT)
+	@cc $(C_FILES) -I $(INC_DIR) -std=gnu99 -Wpedantic -Werror -Wall -o $(OUTPUT)
