@@ -4,7 +4,7 @@
 #include <peripherals.h>
 
 void cpu_set_freq(CPU *cpu, u32 hz) {
-    float freq_pause_nanos_f = (1.0 / hz) * SECOND_IN_NANOS;
+    float freq_pause_nanos_f = (1.0 / hz) * NANOS_IN_SECOND;
     cpu->freq_pause_nanos = (int)freq_pause_nanos_f;
     cpu->freq_hz = hz;
 }
