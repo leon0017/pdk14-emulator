@@ -31,17 +31,27 @@ void print_program_b14(Program *program) {
     }
 }
 
-#define CLOCK_MONOTONIC  1
+#define CLOCK_MONOTONIC      1
 
-#define TARGET_FREQ      (8 * 1000000) // 8 MHZ
-#define SECOND_IN_NANOS  1000000000.0 
-#define FREQ_PAUSE_NANOS (int)((1.0 / TARGET_FREQ) * SECOND_IN_NANOS)
+#define DEFAULT_TARGET_FREQ  (8 * 1000000) // 8 MHZ
+#define SECOND_IN_NANOS      1000000000.0 
+
+int freq_pause_nanos = 0;
+int freq_hz = 0;
+
+void set_cpu_freq(u32 hz) {
+    float freq_pause_nanos_f = (1.0 / hz) * SECOND_IN_NANOS;
+    freq_pause_nanos = (int)freq_pause_nanos_f;
+    freq_hz = hz;
+}
 
 // View intruction set here:
 // https://free-pdk.github.io/instruction-sets/PDK14
 int main() {
     Program program = fu_read_program();
     print_program_hex8(&program);
+
+    set_cpu_freq(DEFAULT_TARGET_FREQ);
 
     struct timespec start, now;
     clock_gettime(CLOCK_MONOTONIC, &start);
@@ -50,8 +60,8 @@ int main() {
     while (1) {
         clock_gettime(CLOCK_MONOTONIC, &now);
         i64 elapsed_ns = (now.tv_sec - start.tv_sec) * 1000000000 + now.tv_nsec - start.tv_nsec;
-        if (elapsed_ns >= FREQ_PAUSE_NANOS) {
-            if (i % 8000000 == 0) {
+        if (elapsed_ns >= freq_pause_nanos) {
+            if (i % freq_hz == 0) {
                 printf("Clock has cycled: %ld times\n", i);
             }
             i++;
